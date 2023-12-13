@@ -1,0 +1,19 @@
+{
+    "name": "strawblond/strawblond-php-sdk",
+    "description": "PHP library for the StrawBlond API",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "StrawBlond\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "StrawBlond"
+        }
+    ],
+    "require": {
+        "saloonphp/saloon": "^3.0"
+    }
+}
