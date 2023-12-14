@@ -22,14 +22,21 @@ Basic usage looks something like this:
 // Initialize a new SDK client using your API key
 $api = new StrawBlond\StrawBlond('YOUR_API_KEY');
 
-// Get your user object
-$user = $api->user()->me()->json();
-
 // Retrieve an invoice
 $invoice = $api->invoice()->get('jDe2KdWYK4')->json();
 
-// Get all invoices
-$invoices = $api->invoice()->all()->json('data');
+// Get all paid invoices and include their contact and company relations
+$invoices = $api->invoice()->all(
+    filters: ['status' => 'paid'],
+    include: ['contact.company'],
+)->json('data');
+
+// Create a new contact
+$contact = $api->contact()->create([
+    'firstname' => 'Max',
+    'lastname' => 'Muster',
+    'email' => 'max@muster.com'
+])->json();
 ```
 
 The StrawBlond API uses personal API keys to authenticate incoming requests. You can view and manage your API keys in the [User Settings](https://app.strawblond.com/user/integrations). Your API keys carry the same permissions as your regular user account, so be sure to keep them secure!
