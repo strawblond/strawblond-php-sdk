@@ -37,12 +37,12 @@ The StrawBlond API uses personal API keys to authenticate incoming requests. You
 > [!IMPORTANT]
 > An API key acts as your user in a specific organization. You cannot access multiple organizations with a single key.
 
-## Available resources
+## Resources
+The SDK gives you access to all resources documented on https://developers.strawblond.com/.
 ```php
 $api = new StrawBlond\StrawBlond('YOUR_API_KEY');
 
-$api->user();
-$api->member();
+// CRUD resources
 $api->contact();
 $api->company();
 $api->project();
@@ -53,10 +53,34 @@ $api->documentElement();
 $api->product();
 $api->rate();
 $api->unit();
+
+// Special resources
+$api->user();
+$api->member();
 $api->webhook();
 ```
 
-### Usage
+### Available methods
+All CRUD resources give you at least following request methods to call:
+
+**Retrieve a single resource**
+`get(string $id)`
+
+**Get a list of resources**
+`all(array $filters, array $include, string $sort, int $page)` 
+
+**Create a new resource**
+`create(array $data)`
+
+**Update an existing resource**
+`update(string $id, array $changes)`
+
+**Delete a resource**
+`delete(string $id)`
+
+Consult our documentation at https://developers.strawblond.com for resources that expose additional methods (like `send()` on invoices and offers).
+
+## Usage
 Start by sending a request using one of the methods available on a resource.
 In this example we're trying to fetch a single invoice given a invoice ID. The `get` method returns a `Response` object.
 ```php
