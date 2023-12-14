@@ -81,8 +81,7 @@ All CRUD resources give you at least following request methods to call:
 Consult our documentation at https://developers.strawblond.com for resources that expose additional methods (like `send()` on invoices and offers).
 
 ## Usage
-Start by sending a request using one of the methods available on a resource.
-In this example we're trying to fetch a single invoice given a invoice ID. The `get` method returns a `Response` object.
+Start by sending a request using one of the methods available on the resource. In this example we're trying to fetch a single invoice given a invoice ID. The `get` method returns a `Response` object.
 ```php
 $response = $api->invoice()->get('jDe2KdWYK4');
 ```
@@ -100,6 +99,15 @@ if ($response->ok()) {
     // ! Requires `illuminate/collections` to be installed
     $lineItems = $response->collect('elements');
 }
+```
+
+Here's another example for creating a new contact:
+```php
+$contact = $api->contact()->create([
+    'firstname' => 'Max',
+    'lastname' => 'Muster',
+    'email' => 'max@muster.com'
+])->json();
 ```
 
 See [Responses](#responses) for more methods on the `Response` object.
