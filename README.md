@@ -34,7 +34,8 @@ $invoices = $api->invoice()->all()->json('data');
 
 The StrawBlond API uses personal API keys to authenticate incoming requests. You can view and manage your API keys in the [User Settings](https://app.strawblond.com/user/integrations). Your API keys carry the same permissions as your regular user account, so be sure to keep them secure!
 
-    ⚠️  An API key acts as your user in a specific organization. You cannot access multiple organizations with a single key.
+> [!IMPORTANT]
+> An API key acts as your user in a specific organization. You cannot access multiple organizations with a single key.
 
 ## Available resources
 ```php
