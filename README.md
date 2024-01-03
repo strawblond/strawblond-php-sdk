@@ -75,7 +75,7 @@ All CRUD resources give you at least following request methods to call:
 
 | Description                | Method                                                         |
 | -------------------------- | -------------------------------------------------------------- |
-| Retrieve a single resrouce | `get(string $id)`                                              |
+| Retrieve a single resource | `get(string $id)`                                              |
 | Get a list of resources    | `all(array $filters, array $include, string $sort, int $page)` |
 | Create a resource          | `create(array $data)`                                          |
 | Update a resource          | `update(string $id, array $changes)`                           |
