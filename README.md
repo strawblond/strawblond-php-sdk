@@ -45,7 +45,9 @@ The StrawBlond API uses personal API keys to authenticate incoming requests. You
 > An API key acts as your user in a specific organization. You cannot access multiple organizations with a single key.
 
 ## Resources
+
 The SDK gives you access to all resources documented on https://developers.strawblond.com/.
+
 ```php
 $api = new StrawBlond\StrawBlond('YOUR_API_KEY');
 
@@ -68,32 +70,29 @@ $api->webhook();
 ```
 
 ### Available methods
+
 All CRUD resources give you at least following request methods to call:
 
-**Retrieve a single resource**
-`get(string $id)`
-
-**Get a list of resources**
-`all(array $filters, array $include, string $sort, int $page)` 
-
-**Create a new resource**
-`create(array $data)`
-
-**Update an existing resource**
-`update(string $id, array $changes)`
-
-**Delete a resource**
-`delete(string $id)`
+| Description                | Method                                                         |
+| -------------------------- | -------------------------------------------------------------- |
+| Retrieve a single resrouce | `get(string $id)`                                              |
+| Get a list of resources    | `all(array $filters, array $include, string $sort, int $page)` |
+| Create a resource          | `create(array $data)`                                          |
+| Update a resource          | `update(string $id, array $changes)`                           |
+| Delete a resource          | `delete(string $id)`                                           |
 
 Consult our documentation at https://developers.strawblond.com for resources that expose additional methods (like `send()` on invoices and offers).
 
 ## Usage
+
 Start by sending a request using one of the methods available on the resource. In this example we're trying to fetch a single invoice given a invoice ID. The `get` method returns a `Response` object.
+
 ```php
 $response = $api->invoice()->get('jDe2KdWYK4');
 ```
 
 We can now check if the request was successful and use the fetched data in various ways:
+
 ```php
 if ($response->ok()) {
     // Get the response data as an json decoded array
@@ -102,13 +101,14 @@ if ($response->ok()) {
     // Same as `json` but gets a single value from the data
     $dueDate = $response->json('due_at');
 
-    // Get the response data as a Laravel Collection. 
+    // Get the response data as a Laravel Collection.
     // ! Requires `illuminate/collections` to be installed
     $lineItems = $response->collect('elements');
 }
 ```
 
 Here's another example for creating a new contact:
+
 ```php
 $contact = $api->contact()->create([
     'firstname' => 'Max',
@@ -120,24 +120,30 @@ $contact = $api->contact()->create([
 See [Responses](#responses) for more methods on the `Response` object.
 
 ### Filtering
+
 When calling the `all` method on a resource, you may pass an `filters` array to the method. (See the API reference on https://developers.strawblond.com for which filters are allowed on a given resource)
+
 ```php
 $projects = $api->project()->all(
     filters: [
-        'status' => 'active', 
+        'status' => 'active',
         'billing_type' => 'flat'
     ],
 )->json('data');
 ```
 
 ### Sorting
+
 When calling the `all` method on a resource, you may pass a `sort` key to the method. (See the API reference on https://developers.strawblond.com for which sort keys are allowed on a given resource)
+
 ```php
 $projects = $api->project()->all(
     sort: 'starts_at'
 )->json('data');
 ```
+
 Sorting is **ascending by default** and can be reversed by adding a hyphen (**-**) to the start of the property name.
+
 ```php
 $projects = $api->project()->all(
     sort: '-starts_at'
@@ -145,18 +151,23 @@ $projects = $api->project()->all(
 ```
 
 ### Including relations
+
 When calling the `get` or `all` method on a resource, you may pass an `include` array to include related resources. (See the API reference on https://developers.strawblond.com for which resources are allowed to be included in a request)
+
 ```php
 $projects = $api->project()->all(
     include: ['company', 'user']
 )->json('data');
 ```
+
 You may also use the dot notation to include nested relations (https://developers.strawblond.com/guide/intro.html#nested-includes)
 
 ### Pagination
+
 The `all` method on most resources returns a paginated list of objects inside a `data` property. The `links` and `meta` properties contain information useful for retrieving more pages.
 
 You can set the page using the `page` argument.
+
 ```php
 $projects = $api->project()->all(
     page: 2,
