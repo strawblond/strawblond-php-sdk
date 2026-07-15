@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-PHP SDK (PHP 8.1+) for the Blond API (`https://api.blond.swiss/api`), built on [Saloon v3](https://docs.saloon.dev/). Saloon is the only dependency. There are no tests, linters, or CI in this repo — the only setup command is `composer install`.
+PHP SDK (PHP 8.2+) for the Blond API (`https://api.blond.swiss/api`), built on [Saloon v4](https://docs.saloon.dev/). Saloon is the only dependency. There are no tests, linters, or CI in this repo — the only setup command is `composer install`.
 
 The product rebranded from StrawBlond to Blond (blond.swiss) in 2026, but **the package name (`strawblond/strawblond-php-sdk`) and the `StrawBlond\` PHP namespace are intentionally kept for backwards compatibility — do not rename them.** The old API host `api.strawblond.com` also still works, and the developer docs still live at https://developers.strawblond.com/.
 

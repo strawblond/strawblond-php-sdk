@@ -15,6 +15,7 @@
         }
     ],
     "require": {
-        "saloonphp/saloon": "^3.0"
+        "php": "^8.2",
+        "saloonphp/saloon": "^4.0"
     }
 }

@@ -4,7 +4,7 @@ The Blond PHP SDK provides convenient access to the Blond API for PHP applicatio
 
 ## Requirements
 
--   PHP 8.1 and later
+-   PHP 8.2 and later
 
 ## Installation
 
