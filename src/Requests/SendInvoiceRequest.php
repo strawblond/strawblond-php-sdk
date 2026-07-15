@@ -20,6 +20,7 @@ class SendInvoiceRequest extends Request implements HasBody
         protected bool $increaseDunningLevel = false,
         protected bool $ccToOwner = false,
         protected bool $adjustDates = false,
+        protected array $attachments = [],
     ) {}
 
     public function resolveEndpoint(): string
@@ -35,6 +36,7 @@ class SendInvoiceRequest extends Request implements HasBody
             'increaseDunningLevel' => $this->increaseDunningLevel,
             'ccToOwner' => $this->ccToOwner,
             'adjustDates' => $this->adjustDates,
+            'attachments' => $this->attachments,
         ];
     }
 }

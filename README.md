@@ -86,6 +86,39 @@ All CRUD resources give you at least following request methods to call:
 
 Consult our documentation at https://developers.strawblond.com for resources that expose additional methods (like `send()` on invoices and offers).
 
+### Invoices
+
+Beyond the CRUD methods, `$api->invoice()` exposes:
+
+| Description                          | Method                                                                                                                                          |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Send an invoice                      | `send(string $id, array $recipients, ?string $message, bool $increaseDunningLevel, bool $ccToOwner, bool $adjustDates, array $attachments)`      |
+| Update the status                    | `updateStatus(string $id, string $status, ?string $paidAt, ?float $conversionRate, bool $notifyCustomer)`                                        |
+| Mark as paid                         | `markAsPaid(string $id, ?string $paidAt, ?float $conversionRate, bool $notifyCustomer)`                                                          |
+| Mark as pending                      | `markAsPending(string $id)`                                                                                                                      |
+| Mark as draft                        | `markAsDraft(string $id)`                                                                                                                        |
+| List by status                       | `drafts()`, `pending()`, `paid()`, `open()`, `overdue()`, `dunned()`, `scheduled()`, `readyForDelivery()` (same arguments as `all()`)            |
+| Line items sub-resource              | `lineItems(string $invoiceId)`                                                                                                                   |
+| Payments sub-resource                | `payments(string $invoiceId)` — supports `all()`, `get()`, `create()` and `delete()` (payments cannot be updated)                                |
+
+```php
+// Record a payment and mark an invoice as paid
+$api->invoice()->payments('jDe2KdWYK4')->create(['amount' => 150.00]);
+$api->invoice()->markAsPaid('jDe2KdWYK4', paidAt: '2026-07-15', notifyCustomer: true);
+```
+
+### Offers
+
+Beyond the CRUD methods, `$api->offer()` exposes:
+
+| Description             | Method                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------ |
+| Send an offer           | `send(string $id, array $recipients, ?string $message, bool $ccToOwner, array $attachments)`      |
+| Archive an offer        | `archive(string $id, ?string $reason)`                                                            |
+| Complete billing        | `completeBilling(string $id, ?string $reason)`                                                    |
+| Reopen billing          | `reopenBilling(string $id)`                                                                       |
+| Line items sub-resource | `lineItems(string $offerId)`                                                                      |
+
 ## Usage
 
 Start by sending a request using one of the methods available on the resource. In this example we're trying to fetch a single invoice given a invoice ID. The `get` method returns a `Response` object.

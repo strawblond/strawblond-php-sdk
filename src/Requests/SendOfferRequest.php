@@ -18,6 +18,7 @@ class SendOfferRequest extends Request implements HasBody
         protected array $recipients,
         protected ?string $message = null,
         protected bool $ccToOwner = false,
+        protected array $attachments = [],
     ) {}
 
     public function resolveEndpoint(): string
@@ -31,6 +32,7 @@ class SendOfferRequest extends Request implements HasBody
             'email' => join(';', $this->recipients),
             'message' => $this->message,
             'ccToOwner' => $this->ccToOwner,
+            'attachments' => $this->attachments,
         ];
     }
 }
