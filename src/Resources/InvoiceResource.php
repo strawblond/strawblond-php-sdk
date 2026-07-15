@@ -16,7 +16,7 @@ class InvoiceResource extends CrudResource
     /**
      * Get all draft invoices
      */
-    public function drafts(array $filters = [], array $include = [], string $sort = null, int $page = 1): Response
+    public function drafts(array $filters = [], array $include = [], ?string $sort = null, int $page = 1): Response
     {
         return $this->all([...$filters, 'status' => 'draft'], $include, $sort, $page);
     }
@@ -24,7 +24,7 @@ class InvoiceResource extends CrudResource
     /**
      * Get all pending invoices
      */
-    public function pending(array $filters = [], array $include = [], string $sort = null, int $page = 1): Response
+    public function pending(array $filters = [], array $include = [], ?string $sort = null, int $page = 1): Response
     {
         return $this->all([...$filters, 'status' => 'pending'], $include, $sort, $page);
     }
@@ -32,7 +32,7 @@ class InvoiceResource extends CrudResource
     /**
      * Get all paid invoices
      */
-    public function paid(array $filters = [], array $include = [], string $sort = null, int $page = 1): Response
+    public function paid(array $filters = [], array $include = [], ?string $sort = null, int $page = 1): Response
     {
         return $this->all([...$filters, 'status' => 'paid'], $include, $sort, $page);
     }

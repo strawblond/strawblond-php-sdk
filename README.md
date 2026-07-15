@@ -1,6 +1,6 @@
-# StrawBlond PHP SDK
+# Blond PHP SDK
 
-The StrawBlond PHP SDK provides convenient access to the StrawBlond API for PHP applications.
+The Blond PHP SDK provides convenient access to the Blond API for PHP applications.
 
 ## Requirements
 
@@ -13,6 +13,9 @@ You can install the library via Composer:
 ```sh
 composer require strawblond/strawblond-php-sdk
 ```
+
+> [!NOTE]
+> StrawBlond is now [Blond](https://blond.swiss). The package name and the `StrawBlond\` PHP namespace are kept unchanged for backwards compatibility.
 
 ## Getting started
 
@@ -39,7 +42,7 @@ $contact = $api->contact()->create([
 ])->json();
 ```
 
-The StrawBlond API uses personal API keys to authenticate incoming requests. You can view and manage your API keys in the [User Settings](https://app.strawblond.com/user/integrations). Your API keys carry the same permissions as your regular user account, so be sure to keep them secure!
+The Blond API uses personal API keys to authenticate incoming requests. You can view and manage your API keys in the [User Settings](https://app.blond.swiss/user/integrations). Your API keys carry the same permissions as your regular user account, so be sure to keep them secure!
 
 > [!IMPORTANT]
 > An API key acts as your user in a specific organization. You cannot access multiple organizations with a single key.
@@ -176,7 +179,7 @@ $projects = $api->project()->all(
 
 ## Responses
 
-After sending a request, the StrawBlond SDK resource will return a `Response` class. This response class contains many helpful methods for interacting with your HTTP response like seeing the HTTP status code and retrieving the body.
+After sending a request, the Blond SDK resource will return a `Response` class. This response class contains many helpful methods for interacting with your HTTP response like seeing the HTTP status code and retrieving the body.
 
 ```php
 $response = $api->invoice()->get('jDe2KdWYK4');

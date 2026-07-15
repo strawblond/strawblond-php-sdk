@@ -27,7 +27,7 @@ class StrawBlond extends Connector
 
     public function resolveBaseUrl(): string
     {
-        return 'https://api.strawblond.com/api';
+        return 'https://api.blond.swiss/api';
     }
 
     protected function defaultHeaders(): array

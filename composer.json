@@ -1,6 +1,6 @@
 {
     "name": "strawblond/strawblond-php-sdk",
-    "description": "PHP library for the StrawBlond API",
+    "description": "PHP library for the Blond.swiss API",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -10,7 +10,8 @@
     },
     "authors": [
         {
-            "name": "StrawBlond"
+            "name": "StrawBlond GmbH",
+            "email": "info@blond.swiss"
         }
     ],
     "require": {
