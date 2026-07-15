@@ -15,6 +15,7 @@ class AllResourceRequest extends Request
         protected array $include = [],
         protected ?string $sort = null,
         protected int $page = 1,
+        protected ?int $perPage = null,
     ) {
     }
 
@@ -48,6 +49,10 @@ class AllResourceRequest extends Request
         }
 
         $query['page'] = $this->page;
+
+        if ($this->perPage !== null) {
+            $query['per_page'] = $this->perPage;
+        }
 
         return $query;
     }

@@ -20,16 +20,17 @@ class DocumentElementResource extends CrudResource
         return 'document_element';
     }
 
-    public function all(array $filters = [], array $include = [], ?string $sort = null, int $page = 1): Response
+    public function all(array $filters = [], array $include = [], ?string $sort = null, int $page = 1, ?int $perPage = null): Response
     {
         return parent::all(
             [...$filters, 'document_type' => match ($this->documentType) {
                 'invoice' => 'Modules\Salesforce\Invoice',
                 'offer' => 'Modules\Salesforce\Offer',
-            }, 'document_id' => $this->documentId], 
-            $include, 
-            $sort, 
-            $page
+            }, 'document_id' => $this->documentId],
+            $include,
+            $sort,
+            $page,
+            $perPage
         );
     }
 }

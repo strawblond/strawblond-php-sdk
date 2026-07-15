@@ -20,8 +20,8 @@ class MemberResource extends BaseResource
     /**
      * Get all members
      */
-    public function all(array $filters = [], array $include = [], string $sort = null, int $page = 1): Response
+    public function all(array $filters = [], array $include = [], string $sort = null, int $page = 1, ?int $perPage = null): Response
     {
-        return $this->connector->send(new AllResourceRequest('member', $filters, $include, $sort, $page));
+        return $this->connector->send(new AllResourceRequest('member', $filters, $include, $sort, $page, $perPage));
     }
 }

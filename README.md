@@ -76,13 +76,20 @@ $api->webhook();
 
 All CRUD resources give you at least following request methods to call:
 
-| Description                | Method                                                         |
-| -------------------------- | -------------------------------------------------------------- |
-| Retrieve a single resource | `get(string $id)`                                              |
-| Get a list of resources    | `all(array $filters, array $include, string $sort, int $page)` |
-| Create a resource          | `create(array $data)`                                          |
-| Update a resource          | `update(string $id, array $changes)`                           |
-| Delete a resource          | `delete(string $id)`                                           |
+| Description                | Method                                                                        |
+| -------------------------- | ------------------------------------------------------------------------------ |
+| Retrieve a single resource | `get(string $id)`                                                              |
+| Get a list of resources    | `all(array $filters, array $include, string $sort, int $page, ?int $perPage)`  |
+| Create a resource          | `create(array $data)`                                                          |
+| Update a resource          | `update(string $id, array $changes)`                                           |
+| Delete a resource          | `delete(string $id)`                                                           |
+
+Some resources support additional shared operations:
+
+| Description                     | Method                                  | Available on                       |
+| ------------------------------- | ---------------------------------------- | ----------------------------------- |
+| Clone a resource                | `clone(string $id, array $overrides)`    | contact, product, invoice, offer    |
+| Restore a soft-deleted resource | `restore(string $id)`                    | project, expense, invoice, offer    |
 
 Consult our documentation at https://developers.strawblond.com for resources that expose additional methods (like `send()` on invoices and offers).
 
@@ -100,6 +107,11 @@ Beyond the CRUD methods, `$api->invoice()` exposes:
 | List by status                       | `drafts()`, `pending()`, `paid()`, `open()`, `overdue()`, `dunned()`, `scheduled()`, `readyForDelivery()` (same arguments as `all()`)            |
 | Line items sub-resource              | `lineItems(string $invoiceId)`                                                                                                                   |
 | Payments sub-resource                | `payments(string $invoiceId)` — supports `all()`, `get()`, `create()` and `delete()` (payments cannot be updated)                                |
+| Create next recurring invoice        | `createNextRecurring(string $id)`                                                                                                                |
+| Next invoice number info             | `nextInfo(?string $issuedAt)` — returns the upcoming `sequence` and `number`                                                                     |
+| Add products as line items           | `addProducts(string $id, array $productIds, ?int $beforeOrder)`                                                                                  |
+| Add rates as line items              | `addRates(string $id, array $rates, ?int $beforeOrder)` — each rate is `['id' => ..., 'quantity' => ...]`                                        |
+| Add expenses as line items           | `addExpenses(string $id, array $expenseIds)`                                                                                                     |
 
 ```php
 // Record a payment and mark an invoice as paid
@@ -118,6 +130,8 @@ Beyond the CRUD methods, `$api->offer()` exposes:
 | Complete billing        | `completeBilling(string $id, ?string $reason)`                                                    |
 | Reopen billing          | `reopenBilling(string $id)`                                                                       |
 | Line items sub-resource | `lineItems(string $offerId)`                                                                      |
+| Add products as line items | `addProducts(string $id, array $productIds, ?int $beforeOrder)`                                |
+| Add rates as line items    | `addRates(string $id, array $rates, ?int $beforeOrder)` — each rate is `['id' => ..., 'quantity' => ...]` |
 
 ## Usage
 

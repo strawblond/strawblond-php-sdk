@@ -27,9 +27,9 @@ abstract class CrudResource extends BaseResource
         return $this->connector->send(new GetResourceRequest($this->getResource(), $id, $include));
     }
 
-    public function all(array $filters = [], array $include = [], ?string $sort = null, int $page = 1): Response
+    public function all(array $filters = [], array $include = [], ?string $sort = null, int $page = 1, ?int $perPage = null): Response
     {
-        return $this->connector->send(new AllResourceRequest($this->getResource(), $filters, $include, $sort, $page));
+        return $this->connector->send(new AllResourceRequest($this->getResource(), $filters, $include, $sort, $page, $perPage));
     }
 
     public function update(string $id, array $changes): Response
